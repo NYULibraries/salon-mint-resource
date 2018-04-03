@@ -1,8 +1,27 @@
 #!/bin/bash
 
 # gets environment variable secrets from .env
-# source: https://stackoverflow.com/questions/19331497/set-environment-variables-from-file
-export $(cat .env | grep -v ^\# | xargs)
+if [ ! -f .env ]; then
+  echo "WARNING: .env file not found! It is recommended you keep your application secrets in .env file."
+else
+  # source: https://stackoverflow.com/questions/19331497/set-environment-variables-from-file
+  export $(cat .env | grep -v ^\# | xargs)
+fi
+
+
+if [ -z "$SALON_CLIENT_ID" ]
+then
+  echo "Enter your APPLICATION ID (no quotation marks):"
+  read client_id
+  export SALON_CLIENT_ID=${client_id}
+fi
+
+if [ -z "$SALON_CLIENT_SECRET" ]
+then
+  echo "Enter your SECRET (no quotation marks):"
+  read client_secret
+  export SALON_CLIENT_SECRET=${client_secret}
+fi
 
 accessToken=$(
   curl -s -X POST \
@@ -13,7 +32,7 @@ accessToken=$(
   sed 's/.*"access_token": *"\([^"]*\)".*}/\1/'
 )
 
-output=""
+output="\n"
 counter=${1:-1}
 while [ $counter -gt 0 ]
 do
@@ -32,6 +51,8 @@ do
   output+=${temp}
   output+="\n"
   counter=$(( $counter - 1 ))
+
+  printf "."
 done
 
 printf $output

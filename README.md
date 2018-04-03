@@ -1,24 +1,30 @@
 # Salon Utility: Mint Resource
 
-This is a utility to be used with [salon](https://github.com/NYULibraries/salon) permalink resolver. Generates and reserves an empty persistent link.
+Generates and reserves an empty persistent link via the [salon](https://github.com/NYULibraries/salon) permalink resolver.
 
 ## Setup
 
-Salon authenticates using a token-based NYU Libraries OAuth at https://login.library.nyu.edu. Application IDs can be found at: https://login.library.nyu.edu/oauth/applications.
+1. Download and unzip the repository, and navigate to the unzipped folder in your OS environment.
 
-In order to pass Salon's authentication, an application ID and its corresponding secret must be provided to the scripts environment. Run the following code, replacing the values in braces with your personal, *secret* login application values.
+2. Salon authenticates using a token-based NYU Libraries OAuth2 application at https://login.library.nyu.edu. Application IDs can be generated and viewed at: https://login.library.nyu.edu/oauth/applications.
 
-```sh
-touch .env
-echo "SALON_CLIENT_ID={APP_ID}" >> .env
-echo "SALON_CLIENT_SECRET={APP_SECRET}" >> .env
+  In order to pass Salon's authentication process, an application ID and its corresponding secret must be provided to the scripts environment. These values are read from environment variables `SALON_CLIENT_ID` and `SALON_CLIENT_SECRET`. If these environment variables are not set on your session, the application will request you to provide them through the terminal.
+
+  Alternatively, you can place your variables in a `.env` file which is read before the program executes. To generate a `.env` file, run the following code in your terminal/shell, replacing the values in braces with your personal, *secret* login application values.
+
+  **Note**: Application IDs/secrets should **never** be shared on a publicly accessible local machine or cloud-based service. Users have a responsibility to keep their authorization keys secret.
+
+  ```sh
+  touch .env
+  echo "SALON_CLIENT_ID=\"{APP_ID}\"" >> .env
+  echo "SALON_CLIENT_SECRET=\"{APP_SECRET}\"" >> .env
 ```
 
-Then, add executable permissions to the script with:
+3. Add executable permissions to the script with:
 
-```
-chmod +x salon-mint-resource.sh
-```
+  ```
+  chmod +x salon-mint-resource.sh
+  ```
 
 ## Usage
 
@@ -33,12 +39,12 @@ Run the script. The script's first argument is an optional argument for requesti
 ```sh
 # Fetch for a single resource
 ./salon-mint-resource.sh
-# OUTPUT:
+# EXAMPLE OUTPUT:
 r3rj2r68
 
 # Fetch for multiple resources
 ./salon-mint-resource.sh 5
-## OUTPUT:
+# EXAMPLE OUTPUT:
 g8sbjjv0
 xd0rl1fy
 86a61cn0
