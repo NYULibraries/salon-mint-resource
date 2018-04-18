@@ -1,0 +1,6 @@
+#Dockerfile.debian
+FROM centos
+RUN mkdir -p /app
+WORKDIR /app
+RUN yum -y update && yum -y install curl
+CMD ./salon-mint-resource.sh
