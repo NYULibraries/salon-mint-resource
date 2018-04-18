@@ -28,7 +28,7 @@ accessToken=$(
   -d grant_type=client_credentials \
   -d client_id=$SALON_CLIENT_ID \
   -d client_secret=$SALON_CLIENT_SECRET \
-  https://dev.login.library.nyu.edu/oauth/token \ |
+  https://login.library.nyu.edu/oauth/token \ |
   sed 's/.*"access_token": *"\([^"]*\)".*}/\1/'
 )
 
@@ -40,7 +40,7 @@ do
     curl -s -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${accessToken}" \
     -X POST \
-    https://persistent-dev.library.nyu.edu/arch/create_empty_resource \ |
+    https://persistent.library.nyu.edu/arch/create_empty_resource \ |
     sed 's/.*"id": *"\([^"]*\)".*}/\1/'
   )
 
