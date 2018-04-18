@@ -40,7 +40,7 @@ do
     curl -s -H "Content-Type: application/json" \
     -H "Authorization: Bearer ${accessToken}" \
     -X POST \
-    https://persistent-dev.library.nyu.edu/create_empty_resource \ |
+    https://persistent-dev.library.nyu.edu/arch/create_empty_resource \ |
     sed 's/.*"id": *"\([^"]*\)".*}/\1/'
   )
 
